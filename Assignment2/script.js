@@ -3,6 +3,8 @@ let downPressed = false;
 let leftPressed = false;
 let rightPressed = false;
 
+let gameStarted = false;
+
 const main = document.querySelector('main');
 
 const startDiv = document.querySelector('.startDiv');
@@ -10,6 +12,7 @@ const startButton = document.querySelector('.start');
 
 function hideStartScreen() {
     startDiv.style.display = 'none';
+    gameStarted = true;
 }
 
 startButton.addEventListener('click', hideStartScreen);
@@ -87,23 +90,25 @@ const playerMouth = player.querySelector('.mouth');
 let playerTop = 0;
 let playerLeft = 0;
 
-setInterval(function() {
-    if(downPressed) {
+setInterval(function () {
+    if (!gameStarted) return; // stop here if the game hasn't started
+
+    if (downPressed) {
         playerTop++;
         player.style.top = playerTop + 'px';
         playerMouth.classList = 'down';
     }
-    else if(upPressed) {
+    else if (upPressed) {
         playerTop--;
         player.style.top = playerTop + 'px';
         playerMouth.classList = 'up';
     }
-    else if(leftPressed) {
+    else if (leftPressed) {
         playerLeft--;
         player.style.left = playerLeft + 'px';
         playerMouth.classList = 'left';
     }
-    else if(rightPressed) {
+    else if (rightPressed) {
         playerLeft++;
         player.style.left = playerLeft + 'px';
         playerMouth.classList = 'right';

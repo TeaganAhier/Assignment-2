@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 1</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Additional CSS for positioning */
+    #circle {
+      width: 50px;
+      height: 50px;
+      background-color: rgb(255, 0, 166);
+      position: absolute;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div id="circle"></div>
+
+  <script>
+    const circle = document.querySelector('#circle');
+    let timer = null;
+
+    // Variables to track key presses
+    let leftPressed = false;
+    let rightPressed = false;
+    let upPressed = false;
+    let downPressed = false;
+
+    // Start movement when the key is pressed
+    function myKeyDown(event) {
+      if (event.key == 'ArrowLeft') {
+        leftPressed = true;
+      } else if (event.key == 'ArrowRight') {
+        rightPressed = true;
+      } else if (event.key == 'ArrowUp') {
+        upPressed = true;
+      } else if (event.key == 'ArrowDown') {
+        downPressed = true;
+      }
+    }
+
+    // Stop movement when the key is released
+    function myKeyUp(event) {
+      if (event.key == 'ArrowLeft') {
+        leftPressed = false;
+      } else if (event.key == 'ArrowRight') {
+        rightPressed = false;
+      } else if (event.key == 'ArrowUp') {
+        upPressed = false;
+      } else if (event.key == 'ArrowDown') {
+        downPressed = false;
+      }
+    }
+
+    // Move the circle smoothly
+    function moveInterval() {
+      let position = circle.getBoundingClientRect();
+
+      if (leftPressed) {
+        circle.style.left = position.left - 1 + 'px';
+      }
+      if (rightPressed) {
+        circle.style.left = position.left + 1 + 'px';
+      }
+      if (upPressed) {
+        circle.style.top = position.top - 1 + 'px';
+      }
+      if (downPressed) {
+        circle.style.top = position.top + 1 + 'px';
+      }
+    }
+
+    // Set the interval to check for movement every 10 milliseconds
+    setInterval(moveInterval, 10);
+
+    // Add event listeners for keydown and keyup
+    document.addEventListener('keydown', myKeyDown);
+    document.addEventListener('keyup', myKeyUp);
+
+    // Move circle when clicked
+    circle.addEventListener('click', function() {
+      alert('The circle was pressed');
+      let position = circle.getBoundingClientRect();
+      circle.style.left = position.left + 10 + 'px'; // Move 10px to the right
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 5em 1fr 5em;
+    grid-template-rows: 5em 1fr 5em;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    background-image: url(background1.jpg);
+    background-size: 20em;
+}
+
+.wall {
+    background-color: rgb(8, 0, 255);
+}
+
+.point {
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    background-color: yellow;
+    border: 2px solid red;
+    border-radius: 100%;
+}
+
+#player {
+    width: 5em;
+    height: 5em;
+    position: absolute;
+}
+
+#player {
+    background-color: red;
+    border-radius: 100%;
+    top: 300px;
+    left: 400px;
+}
+
+#player:hover {
+    cursor: pointer;
+}
+
+.top,
+.bottom {
+    grid-column: 1/4;
+}
+
+.bottom {
+    grid-row: 3;
+}
+
+.right {
+    grid-column: 3;
+}
+
+div:nth-child(5) {
+    top: 300px;
+    left: 700px;
+}
+
+div:nth-child(6) {
+    top: 500px;
+    left: 500px;
+}
+
+div:nth-child(7) {
+    top: 200px;
+    left: 200px;
+}
+
+div:nth-child(8) {
+    top: 400px;
+    left: 250px;
+}
+
+div:nth-child(9) {
+    top: 300px;
+    left: 550px;
+}
+
+aside {
+    width: 200px;
+    position: fixed;
+    height: 100vh;
+    transform: translate(0, 0);
+    left: 100%;
+    margin-left: -240px;
+    background-color: #ddd;
+    border-left: 5px solid #bbb;
+    padding: 20px;
+    font-family: calibri, sans-serif;
+}
+
+#closeside {
+    float: right;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+aside ul {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+    margin-bottom: 20px;
+    overflow: auto;
+}
+
+aside li {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 100%;
+    float: left; 
+    cursor: pointer; 
+    border: 2px solid #ddd; 
+    margin: 0.3em;
+    margin-right: 4px;
+}
+
+aside li:nth-child(1) {background-color: #ff0000;}
+aside li:nth-child(2) {background-color: #0000ff;}
+aside li:nth-child(3) {background-color: #ffff00;}
+aside li:nth-child(4) {background-color: #008000;}
+aside li:nth-child(5) {background-color:#8b008b}
+aside li:nth-child(6) {background-color: #ffa500;}
+aside li:nth-child(7) {background-color: #000000;}
+aside li:nth-child(8) {background-color: #a52a2a;}
+aside li:nth-child(9) {background-color: #ffc0cb;}
+aside li:nth-child(10) {background-color: #ffffff;}

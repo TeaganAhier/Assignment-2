@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 5em 1fr 5em;
+    grid-template-rows: 5em 1fr 5em;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(background1.jpg);
+    background-size: 15em;
+}
+
+.wall,
+.enemy {
+    background-color: rgb(8, 0, 255);
+}
+
+.enemy,
+#player {
+    width: 5em;
+    height: 5em;
+    position: absolute;
+}
+
+#player {
+    background-color: red;
+    border-radius: 100%;
+    top: 300px;
+    left: 400px;
+}
+
+.top,
+.bottom {
+    grid-column: 1/4;
+}
+
+.bottom {
+    grid-row: 3;
+}
+
+.right {
+    grid-column: 3;
+}
+
+div:nth-child(5) {
+    top: 300px;
+    left: 700px;
+}
+
+div:nth-child(6) {
+    top: 500px;
+    left: 500px;
+}
+
+div:nth-child(7) {
+    top: 200px;
+    left: 200px;
+}

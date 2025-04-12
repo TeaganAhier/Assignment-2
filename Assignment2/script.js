@@ -5,6 +5,15 @@ let rightPressed = false;
 
 const main = document.querySelector('main');
 
+const startDiv = document.querySelector('.startDiv');
+const startButton = document.querySelector('.start');
+
+function hideStartScreen() {
+    startDiv.style.display = 'none';
+}
+
+startButton.addEventListener('click', hideStartScreen);
+
 //Player = 2, Wall = 1, Enemy = 3, Point = 0
 let maze = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],

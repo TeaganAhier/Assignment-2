@@ -1,0 +1,27 @@
+h1 + p {
+    color: red;
+}
+
+div:nth-child(2) input[type="text"] {
+    border: 2px red;
+    background-color: red;
+    color: white;
+    margin: 5px;
+}
+
+div:nth-child(3) input[type="text"] {
+    border: 2px green
+    background-color: green;
+    color: white;
+    margin: 5px;
+}
+
+
+body > div:nth-child(4) > ul > li:nth-child(1){
+    background-color: blue;
+    color: white;
+}
+
+body > div:nth-child(5) > ul{
+
+}

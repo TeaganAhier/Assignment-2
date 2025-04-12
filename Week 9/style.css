@@ -1,0 +1,26 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-image: url(background1.jpg);
+	background-size: 17em;
+	font-family: calibri, helvetica, sans-serif;
+}
+
+#circle {
+	border-radius: 100%;
+	width: 6em;
+	height: 6em;
+	background-color: rgb(255, 144, 190);
+	position: absolute;
+	top: 2em;
+	left: 2em;
+	font-size: 2em;
+	cursor: pointer;
+	text-align: center;
+	box-shadow: 5px 5px 5px #838383;
+	text-shadow: 2px 2px 0px #000;
+	color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

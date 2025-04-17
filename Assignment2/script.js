@@ -152,6 +152,28 @@ setInterval(function () {
         }
         playerMouth.classList = 'right';
     }
+    // … after your movement blocks, still inside setInterval:
+
+    // 1. Grab the player's current bounding rect
+    const position = player.getBoundingClientRect();
+
+    // 2. Find every remaining point
+    const points = document.querySelectorAll('.point');
+
+    // 3. Loop through them and test overlap
+    for (let i = 0; i < points.length; i++) {
+        const ptRect = points[i].getBoundingClientRect();
+        if (
+            position.right > ptRect.left &&
+            position.left < ptRect.right &&
+            position.bottom > ptRect.top &&
+            position.top < ptRect.bottom
+        ) {
+            // remove the point class so it disappears
+            points[i].classList.remove('point');
+        }
+    }
+
 
 }, 10);
 

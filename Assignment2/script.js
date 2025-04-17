@@ -93,26 +93,66 @@ let playerLeft = 0;
 setInterval(function () {
     if (!gameStarted) return; // stop here if the game hasn't started
 
+    // DOWN
     if (downPressed) {
-        playerTop++;
-        player.style.top = playerTop + 'px';
+        let position = player.getBoundingClientRect();
+        let newBottom = position.bottom + 1;
+        let btmL = document.elementFromPoint(position.left, newBottom);
+        let btmR = document.elementFromPoint(position.right, newBottom);
+
+        if (!btmL.classList.contains('wall') &&
+            !btmR.classList.contains('wall')) {
+            playerTop++;
+            player.style.top = playerTop + 'px';
+        }
         playerMouth.classList = 'down';
     }
+
+    // UP
     else if (upPressed) {
-        playerTop--;
-        player.style.top = playerTop + 'px';
+        let position = player.getBoundingClientRect();
+        let newTop = position.top - 1;
+        let topL = document.elementFromPoint(position.left, newTop);
+        let topR = document.elementFromPoint(position.right, newTop);
+
+        if (!topL.classList.contains('wall') &&
+            !topR.classList.contains('wall')) {
+            playerTop--;
+            player.style.top = playerTop + 'px';
+        }
         playerMouth.classList = 'up';
     }
+
+    // LEFT
     else if (leftPressed) {
-        playerLeft--;
-        player.style.left = playerLeft + 'px';
+        let position = player.getBoundingClientRect();
+        let newLeft = position.left - 1;
+        let topL = document.elementFromPoint(newLeft, position.top);
+        let btmL = document.elementFromPoint(newLeft, position.bottom);
+
+        if (!topL.classList.contains('wall') &&
+            !btmL.classList.contains('wall')) {
+            playerLeft--;
+            player.style.left = playerLeft + 'px';
+        }
         playerMouth.classList = 'left';
     }
+
+    // RIGHT
     else if (rightPressed) {
-        playerLeft++;
-        player.style.left = playerLeft + 'px';
+        let position = player.getBoundingClientRect();
+        let newRight = position.right + 1;
+        let topR = document.elementFromPoint(newRight, position.top);
+        let btmR = document.elementFromPoint(newRight, position.bottom);
+
+        if (!topR.classList.contains('wall') &&
+            !btmR.classList.contains('wall')) {
+            playerLeft++;
+            player.style.left = playerLeft + 'px';
+        }
         playerMouth.classList = 'right';
     }
+
 }, 10);
 
 document.addEventListener('keydown', keyDown);

@@ -17,7 +17,7 @@ function hideStartScreen() {
 
 startButton.addEventListener('click', hideStartScreen);
 
-//Player = 2, Wall = 1, Enemy = 3, Point = 0
+// Player = 2, Wall = 1, Enemy = 3, Point = 0
 let maze = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 2, 0, 1, 0, 0, 0, 0, 3, 1],
@@ -31,13 +31,13 @@ let maze = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
-//Populates the maze in the HTML
-for (let y of maze) {
-    for (let x of y) {
+// Populate the maze
+for (let row of maze) {
+    for (let cell of row) {
         let block = document.createElement('div');
         block.classList.add('block');
 
-        switch (x) {
+        switch (cell) {
             case 1:
                 block.classList.add('wall');
                 break;
@@ -60,38 +60,35 @@ for (let y of maze) {
     }
 }
 
-//Player movement
-function keyUp(event) {
-    if (event.key === 'ArrowUp') {
-        upPressed = false;
-    } else if (event.key === 'ArrowDown') {
-        downPressed = false;
-    } else if (event.key === 'ArrowLeft') {
-        leftPressed = false;
-    } else if (event.key === 'ArrowRight') {
-        rightPressed = false;
-    }
+// Player movement flags
+function keyDown(event) {
+    if (event.key === 'ArrowUp') upPressed = true;
+    else if (event.key === 'ArrowDown') downPressed = true;
+    else if (event.key === 'ArrowLeft') leftPressed = true;
+    else if (event.key === 'ArrowRight') rightPressed = true;
 }
 
-function keyDown(event) {
-    if (event.key === 'ArrowUp') {
-        upPressed = true;
-    } else if (event.key === 'ArrowDown') {
-        downPressed = true;
-    } else if (event.key === 'ArrowLeft') {
-        leftPressed = true;
-    } else if (event.key === 'ArrowRight') {
-        rightPressed = true;
-    }
+function keyUp(event) {
+    if (event.key === 'ArrowUp') upPressed = false;
+    else if (event.key === 'ArrowDown') downPressed = false;
+    else if (event.key === 'ArrowLeft') leftPressed = false;
+    else if (event.key === 'ArrowRight') rightPressed = false;
 }
+
+document.addEventListener('keydown', keyDown);
+document.addEventListener('keyup', keyUp);
 
 const player = document.querySelector('#player');
 const playerMouth = player.querySelector('.mouth');
 let playerTop = 0;
 let playerLeft = 0;
 
+// Score tracking
+let score = 0;
+const scoreEl = document.querySelector('.score p');
+
 setInterval(function () {
-    if (!gameStarted) return; // stop here if the game hasn't started
+    if (!gameStarted) return;
 
     // DOWN
     if (downPressed) {
@@ -100,14 +97,12 @@ setInterval(function () {
         let btmL = document.elementFromPoint(position.left, newBottom);
         let btmR = document.elementFromPoint(position.right, newBottom);
 
-        if (!btmL.classList.contains('wall') &&
-            !btmR.classList.contains('wall')) {
+        if (!btmL.classList.contains('wall') && !btmR.classList.contains('wall')) {
             playerTop++;
             player.style.top = playerTop + 'px';
         }
         playerMouth.classList = 'down';
     }
-
     // UP
     else if (upPressed) {
         let position = player.getBoundingClientRect();
@@ -115,14 +110,12 @@ setInterval(function () {
         let topL = document.elementFromPoint(position.left, newTop);
         let topR = document.elementFromPoint(position.right, newTop);
 
-        if (!topL.classList.contains('wall') &&
-            !topR.classList.contains('wall')) {
+        if (!topL.classList.contains('wall') && !topR.classList.contains('wall')) {
             playerTop--;
             player.style.top = playerTop + 'px';
         }
         playerMouth.classList = 'up';
     }
-
     // LEFT
     else if (leftPressed) {
         let position = player.getBoundingClientRect();
@@ -130,14 +123,12 @@ setInterval(function () {
         let topL = document.elementFromPoint(newLeft, position.top);
         let btmL = document.elementFromPoint(newLeft, position.bottom);
 
-        if (!topL.classList.contains('wall') &&
-            !btmL.classList.contains('wall')) {
+        if (!topL.classList.contains('wall') && !btmL.classList.contains('wall')) {
             playerLeft--;
             player.style.left = playerLeft + 'px';
         }
         playerMouth.classList = 'left';
     }
-
     // RIGHT
     else if (rightPressed) {
         let position = player.getBoundingClientRect();
@@ -145,22 +136,16 @@ setInterval(function () {
         let topR = document.elementFromPoint(newRight, position.top);
         let btmR = document.elementFromPoint(newRight, position.bottom);
 
-        if (!topR.classList.contains('wall') &&
-            !btmR.classList.contains('wall')) {
+        if (!topR.classList.contains('wall') && !btmR.classList.contains('wall')) {
             playerLeft++;
             player.style.left = playerLeft + 'px';
         }
         playerMouth.classList = 'right';
     }
-    // … after your movement blocks, still inside setInterval:
 
-    // 1. Grab the player's current bounding rect
+    // Point collision & score update
     const position = player.getBoundingClientRect();
-
-    // 2. Find every remaining point
     const points = document.querySelectorAll('.point');
-
-    // 3. Loop through them and test overlap
     for (let i = 0; i < points.length; i++) {
         const ptRect = points[i].getBoundingClientRect();
         if (
@@ -169,13 +154,10 @@ setInterval(function () {
             position.bottom > ptRect.top &&
             position.top < ptRect.bottom
         ) {
-            // remove the point class so it disappears
             points[i].classList.remove('point');
+            score++;
+            scoreEl.textContent = score;
         }
     }
 
-
 }, 10);
-
-document.addEventListener('keydown', keyDown);
-document.addEventListener('keyup', keyUp);

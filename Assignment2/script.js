@@ -6,13 +6,17 @@ let rightPressed = false;
 let gameStarted = false;
 
 const main = document.querySelector('main');
-
 const startDiv = document.querySelector('.startDiv');
 const startButton = document.querySelector('.start');
 
+// Game Over Screen Div
+const gameOverDiv = document.querySelector('#gameOverDiv');
+
+// Function to hide the start screen and start the game
 function hideStartScreen() {
     startDiv.style.display = 'none';
     gameStarted = true;
+    startGame(); // Call startGame to initialize the game
 }
 
 startButton.addEventListener('click', hideStartScreen);
@@ -20,16 +24,33 @@ startButton.addEventListener('click', hideStartScreen);
 // Player = 2, Wall = 1, Enemy = 3, Point = 0
 let maze = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 2, 0, 1, 0, 0, 0, 0, 3, 1],
+    [1, 2, 0, 1, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 1, 1, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 1, 1, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 1, 1, 1],
-    [1, 0, 0, 1, 0, 3, 0, 0, 0, 1],
+    [1, 0, 0, 1, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 1, 0, 1],
-    [1, 3, 1, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 0, 0, 0, 0, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
+
+function createEnemy() {
+    const row = Math.floor(Math.random() * maze.length);
+    const column = Math.floor(Math.random() * maze[row].length);
+
+    if (maze[row][column] === 0) {
+        maze[row][column] = 3; // Place an enemy
+    }
+    else {
+        createEnemy(); // Try again if the cell is not empty
+
+    }
+}
+createEnemy(); // Create an enemy at the start
+createEnemy(); // Create another enemy at the start
+createEnemy(); // Create another enemy at the start
+
 
 // Populate the maze
 for (let row of maze) {
@@ -78,6 +99,30 @@ function keyUp(event) {
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
 
+function moveEnemy(enemy) {
+    let top = 0;
+    let left = 0;
+    let direction = Math.floor(Math.random() * 4); // Random direction (0: up, 1: down, 2: left, 3: right)
+
+    setInterval(function () {
+        if(direction ==1){
+            top++;
+        }
+        if(direction == 2){
+            top--;
+        }
+        if(direction == 3){
+            left--;
+        }
+        if(direction == 4){
+            left++;
+        }
+        enemy.style.top = left + 'px';
+        enemy.style.left = top + 'px';
+    }, 10);
+}
+
+
 const player = document.querySelector('#player');
 const playerMouth = player.querySelector('.mouth');
 let playerTop = 0;
@@ -87,6 +132,37 @@ let playerLeft = 0;
 let score = 0;
 const scoreEl = document.querySelector('.score p');
 
+// Function to show the game over screen
+function showGameOverScreen() {
+    gameOverDiv.style.display = 'flex'; // Show the Game Over screen
+    gameStarted = false; // Stop the game loop
+}
+
+// Function to reset the game
+function restartGame() {
+    score = 0;
+    scoreEl.textContent = score;
+    gameStarted = true;
+
+    // Hide Game Over screen
+    gameOverDiv.style.display = 'none';
+
+    // Reset player position and other elements if needed
+    playerTop = 0;
+    playerLeft = 0;
+    player.style.top = playerTop + 'px';
+    player.style.left = playerLeft + 'px';
+
+    // Recreate the maze or reset points and enemies if needed
+    main.innerHTML = ''; // Clear the board
+    // Rebuild the maze here
+    startGame(); // Rebuild the maze and start the game
+}
+
+// Event listener for the restart button
+document.querySelector('#restartButton').addEventListener('click', restartGame);
+
+// Game Loop
 setInterval(function () {
     if (!gameStarted) return;
 
@@ -158,6 +234,28 @@ setInterval(function () {
             score++;
             scoreEl.textContent = score;
         }
+    }
+
+    // Check for collision with enemies (game over if collision occurs)
+    const enemies = document.querySelectorAll('.enemy');
+    for (let i = 0; i < enemies.length; i++) {
+        const enemyRect = enemies[i].getBoundingClientRect();
+        if (
+            position.right > enemyRect.left &&
+            position.left < enemyRect.right &&
+            position.bottom > enemyRect.top &&
+            position.top < enemyRect.bottom
+        ) {
+            // Trigger death animation when collision occurs
+            player.classList.add('dead'); // Add the "dead" class to start the animation
+            showGameOverScreen();  // Show Game Over if player hits an enemy
+            return; // Stop the game loop
+        }
+    }
+
+    // Check if all points are collected (game over condition)
+    if (points.length === 0) {
+        showGameOverScreen(); // Show Game Over if all points are collected
     }
 
 }, 10);

@@ -1,0 +1,11 @@
+p {margin-bottom: 2em;}
+
+div {background-image: url(dice.png); width: 60px; height: 60px; cursor: pointer;}
+
+
+.side1 {background-position: 0 0;}
+.side2 {background-position: -63px 0;}
+.side3 {background-position: -126px 0;}
+.side4 {background-position: -189px 0;}
+.side5 {background-position: -253px 0;}
+.side6 {background-position: 60px 0;}

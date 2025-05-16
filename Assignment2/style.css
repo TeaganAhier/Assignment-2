@@ -13,7 +13,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 80vh 1fr;
     grid-template-rows: auto;
-    grid-template-areas: 
+    grid-template-areas:
         "header header header"
         "lboard main score"
         "lboard main controls";
@@ -35,11 +35,11 @@ header {
 }
 
 .startDiv div {
-	background-color: #ccc;
+    background-color: #ccc;
     z-index: 100;
-	cursor: pointer;
-	border-radius: 20px;
-	box-shadow: 4px 4px 4px #000;
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 4px 4px 4px #000;
     padding: 20px 30px;
     display: flex;
     height: 32px;
@@ -47,9 +47,76 @@ header {
 
 .startDiv h1 {
     text-shadow: 2px 2px 2px #000;
-	font-size: 2em;
+    font-size: 2em;
     text-decoration: none;
     margin-left: 10px;
+}
+
+/* Game Over Button with Pac-Man icon on the left and text aligned vertically */
+#gameOverDiv #restartButton {
+    background-color: #ccc;
+    z-index: 100;
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 4px 4px 4px #000;
+    padding: 25px 40px;  /* Adjust padding to make it more compact */
+    display: flex;
+    flex-direction: column;  /* Stack the text vertically */
+    align-items: center;  /* Center both the text and icon */
+    justify-content: center;  /* Center text vertically */
+    height: 120px;  /* Adjust height to fit both texts and the icon */
+    width: auto; /* Automatically adjust width */
+    position: relative; /* Ensure proper alignment of elements */
+}
+
+/* Pac-Man icon positioning */
+#gameOverDiv #restartButton .icon {
+    display: flex;
+    align-items: center;  /* Center icon vertically */
+    justify-content: center;
+    margin-bottom: 10px;  /* Space between the icon and text */
+}
+
+/* Increased size of the Pac-Man icon */
+#gameOverDiv #restartButton img {
+    width: 40px;  /* Set larger Pac-Man icon */
+    height: auto;  /* Maintain the aspect ratio */
+}
+
+/* Text for "Game Over" and "Click to Restart" */
+#gameOverDiv #restartButton .text {
+    display: flex;
+    flex-direction: column;  /* Stack the text vertically */
+    justify-content: center;  /* Center the text vertically */
+    text-align: center;  /* Center text inside the button */
+    width: 100%;  /* Ensure text takes up remaining space */
+    text-shadow: 2px 2px 2px #000;  /* Apply shadow effect */
+
+}
+
+/* Large Game Over Text */
+#gameOverDiv #restartButton .text h1 {
+    color: #fff;
+    text-shadow: 2px 2px 2px #000;  /* Apply shadow effect */
+    font-size: 1.8em;  /* Larger text for "Game Over" */
+    margin: 0;
+}
+
+/* Smaller Restart Instruction with shadow and outline effect */
+#gameOverDiv #restartButton .text p {
+    color: #fff;
+    text-shadow: 2px 2px 2px #000;  /* Apply shadow effect */
+    font-size: 1.2em;  /* Smaller text for "Click to Restart" */
+    margin: 5px 0 0;
+    text-shadow: 2px 2px 2px #000;  /* Apply shadow effect */
+
+}
+
+#gameOverDiv #restartButton p {
+    color: #fff; /* White color */
+    font-size: 1.2em; /* Smaller text */
+    text-shadow: 2px 2px 2px #000; /* Add shadow effect */
+    margin: 5px 0 0;
 }
 
 header h1 {
@@ -92,6 +159,11 @@ main {
 
 .score {
     grid-area: score;
+}
+
+.score p {
+    font-size: 2em;
+    text-align: center;
 }
 
 .leaderboard {
@@ -143,6 +215,7 @@ div p {
 .point {
     border-radius: 100%;
     background-color: white;
+    display: block;
 }
 
 .wall {
@@ -152,7 +225,10 @@ div p {
 }
 
 /* Styles for the player direction */
-.up, .down, .left, .right {
+.up,
+.down,
+.left,
+.right {
     width: 100%;
     height: 100%;
     background-color: black;
@@ -162,14 +238,32 @@ div p {
     left: 0;
 }
 
-.up { clip-path: polygon(0 0, 100% 0, 50% 50%); }
-.down { clip-path: polygon(0 100%, 100% 100%, 50% 50%); }
-.left { clip-path: polygon(0 0, 0 100%, 50% 50%); }
-.right { clip-path: polygon(100% 0, 100% 100%, 50% 50%); }
+.up {
+    clip-path: polygon(0 0, 100% 0, 50% 50%);
+}
+
+.down {
+    clip-path: polygon(0 100%, 100% 100%, 50% 50%);
+}
+
+.left {
+    clip-path: polygon(0 0, 0 100%, 50% 50%);
+}
+
+.right {
+    clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+}
 
 @keyframes mouth {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }
 
 /* Directional button styling */
@@ -178,7 +272,7 @@ div p {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    grid-template-areas: 
+    grid-template-areas:
         ". upArrow ."
         "leftArrow . rightArrow"
         ". downArrow .";
@@ -190,10 +284,21 @@ button {
     background-color: rgb(10, 10, 10);
 }
 
-button:nth-child(1) { grid-area: leftArrow; }
-button:nth-child(2) { grid-area: upArrow; }
-button:nth-child(3) { grid-area: rightArrow; }
-button:nth-child(4) { grid-area: downArrow; }
+button:nth-child(1) {
+    grid-area: leftArrow;
+}
+
+button:nth-child(2) {
+    grid-area: upArrow;
+}
+
+button:nth-child(3) {
+    grid-area: rightArrow;
+}
+
+button:nth-child(4) {
+    grid-area: downArrow;
+}
 
 @keyframes deathAnimation {
     0% {
@@ -211,7 +316,8 @@ button:nth-child(4) { grid-area: downArrow; }
 
 @keyframes hitAnimation {
 
-    0%, 100% {
+    0%,
+    100% {
         background-color: yellow;
         transform: scale(1);
     }
@@ -220,7 +326,6 @@ button:nth-child(4) { grid-area: downArrow; }
         background-color: red;
         transform: scale(0.75);
     }
-    
 }
 
 .dead {

@@ -12,12 +12,6 @@ const startButton = document.querySelector('.start');
 // Game Over Screen Div
 const gameOverDiv = document.querySelector('#gameOverDiv');
 
-// Function to hide the start screen and start the game
-function hideStartScreen() {
-    startDiv.style.display = 'none';
-    gameStarted = true;
-    startGame(); // Call startGame to initialize the game
-}
 
 startButton.addEventListener('click', hideStartScreen);
 
@@ -35,16 +29,43 @@ let maze = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
-function createEnemy() {
-    const row = Math.floor(Math.random() * maze.length);
-    const column = Math.floor(Math.random() * maze[row].length);
+// Function to hide the start screen and start the game
+function hideStartScreen() {
+    startDiv.style.display = 'none';
+    gameStarted = true;
+    startGame(); // Call startGame to initialize the game
+}
 
-    if (maze[row][column] === 0) {
-        maze[row][column] = 3; // Place an enemy
-    }
-    else {
-        createEnemy(); // Try again if the cell is not empty
 
+
+function startGame() {
+    main.innerHTML = ''; // Clear the board
+    for (let row of maze) {
+        for (let cell of row) {
+            let block = document.createElement('div');
+            block.classList.add('block');
+
+            switch (cell) {
+                case 1:
+                    block.classList.add('wall');
+                    break;
+                case 2:
+                    block.id = 'player';
+                    let mouth = document.createElement('div');
+                    mouth.classList.add('mouth');
+                    block.appendChild(mouth);
+                    break;
+                case 3:
+                    block.classList.add('enemy');
+                    break;
+                default:
+                    block.classList.add('point');
+                    block.style.height = '1vh';
+                    block.style.width = '1vh';
+            }
+
+            main.appendChild(block);
+        }
     }
 }
 createEnemy(); // Create an enemy at the start
@@ -100,26 +121,16 @@ document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
 
 function moveEnemy(enemy) {
-    let top = 0;
-    let left = 0;
-    let direction = Math.floor(Math.random() * 4); // Random direction (0: up, 1: down, 2: left, 3: right)
+    let position = enemy.getBoundingClientRect();
+    let newRight = position.right + 1;
+    let topR = document.elementFromPoint(newRight, position.top);
+    let btmR = document.elementFromPoint(newRight, position.bottom);
 
-    setInterval(function () {
-        if(direction ==1){
-            top++;
-        }
-        if(direction == 2){
-            top--;
-        }
-        if(direction == 3){
-            left--;
-        }
-        if(direction == 4){
-            left++;
-        }
-        enemy.style.top = left + 'px';
-        enemy.style.left = top + 'px';
-    }, 10);
+    if (!topR.classList.contains('wall') && !btmR.classList.contains('wall')) {
+        playerLeft++;
+        player.style.left = playerLeft + 'px';
+    }
+    playerMouth.classList = 'right';
 }
 
 

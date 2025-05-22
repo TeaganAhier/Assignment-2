@@ -1,5 +1,7 @@
+/* Font import */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+/* Universal reset */
 * {
     margin: 0;
     padding: 0;
@@ -7,6 +9,7 @@
     font-family: 'Press Start 2P';
 }
 
+/* Body layout */
 body {
     background-color: black;
     height: 100vh;
@@ -21,12 +24,15 @@ body {
     justify-items: center;
 }
 
+/* Header */
 header {
     grid-area: header;
     text-align: center;
 }
 
-.startDiv, .playerSelection {
+/* Start and player selection containers */
+.startDiv,
+.playerSelection {
     position: absolute;
     display: flex;
     height: 100vh;
@@ -34,7 +40,9 @@ header {
     justify-content: center;
 }
 
-.startDiv div, .playerSelection div{
+/* Menu style */
+.startDiv div,
+.playerSelection div {
     background-color: #ccc;
     z-index: 100;
     cursor: pointer;
@@ -46,84 +54,87 @@ header {
     margin: 10px;
 }
 
-.startDiv h1, .playerSelection h1 {
+/* Menu headings */
+.startDiv h1,
+.playerSelection h1 {
     text-shadow: 2px 2px 2px #000;
     font-size: 2em;
     text-decoration: none;
     margin-left: 10px;
 }
 
-/* Game Over Button with Pac-Man icon on the left and text aligned vertically */
+/* Game over button */
 #gameOverDiv #restartButton {
     background-color: #ccc;
     z-index: 100;
     cursor: pointer;
     border-radius: 20px;
     box-shadow: 4px 4px 4px #000;
-    padding: 25px 40px;  /* Adjust padding to make it more compact */
+    padding: 25px 40px;
     display: flex;
-    flex-direction: column;  /* Stack the text vertically */
-    align-items: center;  /* Center both the text and icon */
-    justify-content: center;  /* Center text vertically */
-    height: 120px;  /* Adjust height to fit both texts and the icon */
-    width: auto; /* Automatically adjust width */
-    position: relative; /* Ensure proper alignment of elements */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    width: auto;
+    position: relative;
 }
 
-/* Pac-Man icon positioning */
+/* Game over icon */
 #gameOverDiv #restartButton .icon {
     display: flex;
-    align-items: center;  /* Center icon vertically */
+    align-items: center;
     justify-content: center;
-    margin-bottom: 10px;  /* Space between the icon and text */
+    margin-bottom: 10px;
 }
 
-/* Increased size of the Pac-Man icon */
+/* Game over image */
 #gameOverDiv #restartButton img {
-    width: 40px;  /* Set larger Pac-Man icon */
-    height: auto;  /* Maintain the aspect ratio */
+    width: 40px;
+    height: auto;
 }
 
-/* Text for "Game Over" and "Click to Restart" */
+/* Game over text container */
 #gameOverDiv #restartButton .text {
     display: flex;
-    flex-direction: column;  /* Stack the text vertically */
-    justify-content: center;  /* Center the text vertically */
-    text-align: center;  /* Center text inside the button */
-    width: 100%;  /* Ensure text takes up remaining space */
-    text-shadow: 2px 2px 2px #000;  /* Apply shadow effect */
-
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    text-shadow: 2px 2px 2px #000;
 }
 
-/* Large Game Over Text */
+/* Game over heading */
 #gameOverDiv #restartButton .text h1 {
     color: #fff;
-    text-shadow: 2px 2px 2px #000;  /* Apply shadow effect */
-    font-size: 1.8em;  /* Larger text for "Game Over" */
+    text-shadow: 2px 2px 2px #000;
+    font-size: 1.8em;
     margin: 0;
 }
 
-/* Smaller Restart Instruction with shadow and outline effect */
+/* Game over paragraph */
 #gameOverDiv #restartButton .text p {
     color: #fff;
-    text-shadow: 2px 2px 2px #000;  /* Apply shadow effect */
-    font-size: 1.2em;  /* Smaller text for "Click to Restart" */
+    text-shadow: 2px 2px 2px #000;
+    font-size: 1.2em;
     margin: 5px 0 0;
-    text-shadow: 2px 2px 2px #000;  /* Apply shadow effect */
-
+    text-shadow: 2px 2px 2px #000;
 }
 
+/* Game over text */
 #gameOverDiv #restartButton p {
-    color: #fff; /* White color */
-    font-size: 1.2em; /* Smaller text */
-    text-shadow: 2px 2px 2px #000; /* Add shadow effect */
+    color: #fff;
+    font-size: 1.2em;
+    text-shadow: 2px 2px 2px #000;
     margin: 5px 0 0;
 }
 
+/* Header title */
 header h1 {
     font-size: 4em;
 }
 
+/* Main game grid */
 main {
     grid-area: main;
     display: grid;
@@ -134,7 +145,7 @@ main {
     justify-items: center;
 }
 
-/* Lives styling */
+/* Lives display */
 .lives {
     position: absolute;
     top: 0;
@@ -145,6 +156,7 @@ main {
     margin: 0.5em;
 }
 
+/* Lives indicator */
 .lives li {
     list-style: none;
     background-color: yellow;
@@ -154,49 +166,59 @@ main {
     margin: 5px;
 }
 
+/* Lives list */
 .lives ul {
     display: flex;
 }
 
+/* Score container */
 .score {
     grid-area: score;
 }
 
+/* Score text */
 .score p {
     font-size: 2em;
     text-align: center;
 }
 
+/* Leaderboard section */
 .leaderboard {
     grid-area: lboard;
 }
 
+/* Leaderboard list */
 .leaderboard ol {
     margin-left: 2.5em;
     margin-top: 1em;
     text-align: left;
 }
 
+/* Leaderboard items */
 .leaderboard ol li {
     font-size: 0.85em;
     padding: 1em 0;
 }
 
+/* Generic div */
 div {
     height: 100%;
     text-align: center;
 }
 
+/* Div headings */
 div h1 {
     font-size: 1.25em;
     text-decoration: underline;
 }
 
+/* Div paragraphs */
 div p {
     margin: 0.5em;
     font-size: 2em;
 }
 
+/* Player character */
 #player {
     background-color: yellow;
     border-radius: 100%;
@@ -205,6 +227,7 @@ div p {
     height: 85%;
 }
 
+/* Enemy character */
 .enemy {
     background-color: green;
     border-radius: 100%;
@@ -213,19 +236,21 @@ div p {
     position: relative;
 }
 
+/* Point item */
 .point {
     border-radius: 100%;
     background-color: white;
     display: block;
 }
 
+/* Wall element */
 .wall {
     background-color: blue;
     width: 100%;
     height: 100%;
 }
 
-/* Styles for the player direction */
+/* Direction indicators */
 .up,
 .down,
 .left,
@@ -237,38 +262,40 @@ div p {
     position: absolute;
     top: 0;
     left: 0;
-
 }
 
+/* Up direction */
 .up {
     clip-path: polygon(0 0, 100% 0, 50% 50%);
 }
 
+/* Down direction */
 .down {
     clip-path: polygon(0 100%, 100% 100%, 50% 50%);
 }
 
+/* Left direction */
 .left {
     clip-path: polygon(0 0, 0 100%, 50% 50%);
 }
 
+/* Right direction */
 .right {
     clip-path: polygon(100% 0, 100% 100%, 50% 50%);
 }
 
+/* Mouth animation */
 @keyframes mouth {
-
     0%,
     100% {
         opacity: 1;
     }
-
     50% {
         opacity: 0;
     }
 }
 
-/* Directional button styling */
+/* Controls container */
 .controls {
     grid-area: controls;
     display: grid;
@@ -282,58 +309,63 @@ div p {
     height: 25vh;
 }
 
+/* Button styles */
 button {
     color: var(--buttonColor, white);
 }
 
+/* Left button */
 button:nth-child(1) {
     grid-area: leftArrow;
 }
 
+/* Up button */
 button:nth-child(2) {
     grid-area: upArrow;
 }
 
+/* Right button */
 button:nth-child(3) {
     grid-area: rightArrow;
 }
 
+/* Down button */
 button:nth-child(4) {
     grid-area: downArrow;
 }
 
+/* Death animation */
 @keyframes deathAnimation {
     0% {
         transform: scale(1);
     }
-
     50% {
         transform: scale(0.5);
     }
-
     100% {
         transform: scale(0);
     }
 }
 
+/* Hit animation */
 @keyframes hitAnimation {
-
     0%,
     100% {
         background-color: yellow;
         transform: scale(1);
     }
-
     50% {
         background-color: red;
         transform: scale(0.75);
     }
 }
 
+/* Dead state */
 .dead {
     animation: deathAnimation 1.5s ease-in-out forwards;
 }
 
+/* Hit state */
 .hit {
     animation: hitAnimation 1.5s ease-in-out;
 }

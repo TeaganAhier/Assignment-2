@@ -30,7 +30,7 @@ let enemyTop = 0;
 let enemyLeft = 0;
 let score = 0;
 let livesCount = 3;
-let isInvulnerable = false; 
+let isInvulnerable = false;
 let difficulty = 1;
 let twoPlayerMode = false;
 let isLightMode = false;
@@ -51,15 +51,15 @@ startDiv.style.display = 'none';
 lbttn.addEventListener('click', lbttnClick);
 ubttn.addEventListener('click', ubttnClick);
 rbttn.addEventListener('click', rbttnClick);
-dbttn.addEventListener('click', dbttnClick); 
+dbttn.addEventListener('click', dbttnClick);
 
 // Function that hides the player selection screen and shows the start screen based on the selected mode
-function onePlay(){
+function onePlay() {
     onePlayer.style.display = 'none'; // Hide the two buttons
     twoPlayer.style.display = 'none';
     startDiv.style.display = 'flex'; // Display the start screen
 }
-function twoPlay(){
+function twoPlay() {
     onePlayer.style.display = 'none'; // Hide the two buttons
     twoPlayer.style.display = 'none';
     twoPlayerMode = true  // Set the game mode to two-player
@@ -79,9 +79,9 @@ function lightModeSwitch() { // Function that switches between light and dark mo
     const buttonText = isLightMode ? 'Dark Mode' : 'Light Mode';  // Set the button text based on the mode
     lightModeButton.textContent = buttonText;  // Update the button text
     if (isLightMode) { // If light mode is enabled, change all the colors to black except the text we have set to white
-        body.style.backgroundColor = '#ffffff'; 
-        body.style.color = '#000000'; 
-        body.style.transition = 'background-color 0.5s, color 0.5s'; 
+        body.style.backgroundColor = '#ffffff';
+        body.style.color = '#000000';
+        body.style.transition = 'background-color 0.5s, color 0.5s';
         const points = document.querySelectorAll('.point');  // Get all the elements we want to keep the same
         var all = document.getElementsByTagName("*");
         const onePlayer = document.querySelector('.onePlayer h1');
@@ -90,16 +90,16 @@ function lightModeSwitch() { // Function that switches between light and dark mo
         const startButton = document.querySelector('.start h1');
         const gameOver = document.querySelector('#gameOverDiv h1');
         const gameOverp = document.querySelector('#gameOverDiv p');
-        for (var i=0; i < all.length; i++) { // Loop through all the elements and set their color to black
+        for (var i = 0; i < all.length; i++) { // Loop through all the elements and set their color to black
             all[i].style.color = "black";
-        }    
+        }
         onePlayer.style.color = "white";  // Set the color of the elements we want to white
         twoPlayer.style.color = "white";
         startButton.style.color = "white";
         gameOver.style.color = "white";
         gameOverp.style.color = "white";
         document.documentElement.style.setProperty('--mouthColor', 'white');
-        for (var i=0; i < button.length; i++) {  // Loop through all the buttons and set their color to white
+        for (var i = 0; i < button.length; i++) {  // Loop through all the buttons and set their color to white
             button[i].style.backgroundColor = "white";
         }
         for (let i = 0; i < points.length; i++) {
@@ -107,21 +107,21 @@ function lightModeSwitch() { // Function that switches between light and dark mo
         }
     }
     else {  // Same thing but for dark mode
-        body.style.backgroundColor = '#000000'; 
-        body.style.color = '#ffffff'; 
-        body.style.transition = 'background-color 0.5s, color 0.5s'; 
+        body.style.backgroundColor = '#000000';
+        body.style.color = '#ffffff';
+        body.style.transition = 'background-color 0.5s, color 0.5s';
         var all = document.getElementsByTagName("*");
         const points = document.querySelectorAll('.point');
         const onePlayer = document.querySelector('.onePlayer h1');
         const twoPlayer = document.querySelector('.twoPlayer h1');
-        for (var i=0; i < all.length; i++) {
+        for (var i = 0; i < all.length; i++) {
             all[i].style.color = "white";
         }
         onePlayer.style.color = "white";
         twoPlayer.style.color = "white";
         document.documentElement.style.setProperty('--mouthColor', 'black');
-        for (let i = 0; i < points.length; i++) {  
-            points[i].style.backgroundColor = '#ffffff'; 
+        for (let i = 0; i < points.length; i++) {
+            points[i].style.backgroundColor = '#ffffff';
         }
     }
 
@@ -140,13 +140,14 @@ function updateLeaderboard() {  // Function that updates the leaderboard
     const leaderboardOl = document.querySelector('.leaderboard ol');  // Get the leaderboard element
     if (leaderboardOl) {
         leaderboardOl.innerHTML = '';
-        
+
         scores.forEach((item, index) => {  // Loop through the scores and create a list item for each score
             const li = document.createElement('li');
             li.textContent = `${item.name}: ${item.score}`;
             leaderboardOl.appendChild(li);
-    });
-}}
+        });
+    }
+}
 
 
 startGame();  // Start the game to allow for maze generation and shows the start screen
@@ -156,96 +157,96 @@ gameStarted = false;  // Set the game to not started so that the player can sele
 
 function generateMaze(level) {  // Function that generates the maze
     const size = 10;  // Size of the maze
-    let grid = Array.from({length: size}, () => Array(size).fill(1));  // Create a grid filled with walls
-  
-    for (let i = 1; i < size - 1; i++) {  
-      for (let j = 1; j < size - 1; j++) {
-        grid[i][j] = 0;                     // Fill the grid with empty spaces
-      }
+    let grid = Array.from({ length: size }, () => Array(size).fill(1));  // Create a grid filled with walls
+
+    for (let i = 1; i < size - 1; i++) {
+        for (let j = 1; j < size - 1; j++) {
+            grid[i][j] = 0;                     // Fill the grid with empty spaces
+        }
     }
-   
+
     const wallsCount = 10;  // Number of walls to be placed
-  
+
     let coords = [];  // Array to hold the coordinates of the walls
-    for (let i = 1; i < size - 1; i++)  
-      for (let j = 1; j < size - 1; j++)
-        coords.push([i, j]);        // Loop through the grid and add the coordinates to the array
+    for (let i = 1; i < size - 1; i++)
+        for (let j = 1; j < size - 1; j++)
+            coords.push([i, j]);        // Loop through the grid and add the coordinates to the array
     shuffle(coords);              // Shuffle the coordinates to randomize the wall placement
-  
+
     for (let w = 0; w < wallsCount; w++) {
-      const [x, y] = coords[w];         // Get the coordinates of the wall
-      grid[x][y] = 1;                   // Set the wall in the grid 
+        const [x, y] = coords[w];         // Get the coordinates of the wall
+        grid[x][y] = 1;                   // Set the wall in the grid 
     }
-  
+
     let open = coords.slice(wallsCount);    // Get the remaining coordinates
     shuffle(open);    // Shuffle the coordinates again to randomize the placement of the player and enemies
     const [px, py] = open.pop();  // Get the coordinates of the player
     grid[px][py] = 2;       // Set the player in the grid
-  
+
     for (let e = 0; e < level; e++) {       // Loop through the level and place the enemies
-      const [ex, ey] = open.pop();      // Get the coordinates of the enemy
-      grid[ex][ey] = 3;         // Set the enemy in the grid
+        const [ex, ey] = open.pop();      // Get the coordinates of the enemy
+        grid[ex][ey] = 3;         // Set the enemy in the grid
     }
-  
-   
+
+
     if (!isConnected(grid, px, py)) {       // Check if the maze is connected
-      return generateMaze(level);   // If not, generate a new maze
+        return generateMaze(level);   // If not, generate a new maze
     }
-  
+
     return grid;  // Return the generated maze
-  }
-  
+}
+
 function shuffle(a) {   // Function that shuffles the array
-    for (let i = a.length - 1; i > 0; i--) {  
+    for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));  // Get a random index
         [a[i], a[j]] = [a[j], a[i]];        // Swap the elements
     }
 }
-  
+
 function isConnected(grid, sx, sy) {  // Function that checks if the maze is connected
     const n = grid.length;  // Get the size of the grid
-    let visited = Array.from({length: n}, () => Array(n).fill(false)); // Create a visited array to keep track of the visited cells
+    let visited = Array.from({ length: n }, () => Array(n).fill(false)); // Create a visited array to keep track of the visited cells
     let queue = [[sx, sy]];   // Create a queue to hold the cells to be visited
     visited[sx][sy] = true;  // Mark the starting cell as visited
 
     while (queue.length) {  // While there are cells to be visited, continue the search 
         const [x, y] = queue.shift();
-        for (let [dx, dy] of [[1,0],[-1,0],[0,1],[0,-1]]) {
-        const nx = x + dx, ny = y + dy;
-        if (
-            nx >= 0 && nx < n &&
-            ny >= 0 && ny < n &&
-            !visited[nx][ny] &&
-            grid[nx][ny] !== 1
-        ) {
-            visited[nx][ny] = true; 
-            queue.push([nx, ny]);
-        }
+        for (let [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+            const nx = x + dx, ny = y + dy;
+            if (
+                nx >= 0 && nx < n &&
+                ny >= 0 && ny < n &&
+                !visited[nx][ny] &&
+                grid[nx][ny] !== 1
+            ) {
+                visited[nx][ny] = true;
+                queue.push([nx, ny]);
+            }
         }
     }
 
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
-        if (grid[i][j] === 0 && !visited[i][j]) {  // Check if there are any unvisited empty cells
-            return false;  // If there are, return false
-        }
+            if (grid[i][j] === 0 && !visited[i][j]) {  // Check if there are any unvisited empty cells
+                return false;  // If there are, return false
+            }
         }
     }
     return true; // If all empty cells are visited, return true
 }
-  
+
 
 function startGame() {  // Function that starts the game
     updateLeaderboard();   // Update the leaderboard upon starting the game
     updateLevelCounter();   // Update the level counter
 
     maze = generateMaze(difficulty);  // Generate the maze based on the difficulty level
-    
+
     for (let y of maze) {  // Loop through the maze and create the blocks, and add the payer and enemies
         for (let x of y) {
             let block = document.createElement('div');
             block.classList.add('block');
-    
+
             switch (x) {
                 case 1:
                     block.classList.add('wall');
@@ -264,19 +265,19 @@ function startGame() {  // Function that starts the game
                     block.style.height = '1vh';
                     block.style.width = '1vh';
             }
-    
+
             main.appendChild(block);
         }
     }
-    
+
     // Set some variables at the start of the game to remove any states that are left over from the last game
-    player = document.querySelector('#player');  
+    player = document.querySelector('#player');
     playerMouth = player.querySelector('.mouth');
     playerTop = 0;
     playerLeft = 0;
     enemyTop = 0;
     enemyLeft = 0;
-    lives(); 
+    lives();
     upPressed = false;
     downPressed = false;
     leftPressed = false;
@@ -297,8 +298,8 @@ function nextLevel() { // Function that shows the next level screen
     gameStarted = false;   // Stop the game loop 
     difficulty++;  // Increase the difficulty level
     startDiv.style.display = 'flex';   // Show the start screen and says Next Level
-    startDiv.style.justifyContent = 'center'; 
-    startDiv.style.alignItems = 'center'; 
+    startDiv.style.justifyContent = 'center';
+    startDiv.style.alignItems = 'center';
     startDiv.querySelector('h1').textContent = 'Next Level!';
     main.innerHTML = '';  // Clear the maze so that a new one can be generated
     if (livesCount < 3) {  // If the player has lost a life, add one
@@ -308,19 +309,19 @@ function nextLevel() { // Function that shows the next level screen
     startGame();  // Create a new maze and then stop the game so that the player can start
     gameStarted = false;
 }
- 
+
 function showGameOverScreen() {  // Function that shows the game over screen
-    gameOverDiv.style.display = 'flex'; 
+    gameOverDiv.style.display = 'flex';
     gameStarted = false;   // Stop the game loop
     const name = prompt("Enter your name:");  // Prompt the player for their name for the leaderboard
     localStorage.setItem(name, score);  // Set the score in the local storage
     difficulty = 1;  // Reset the difficulty level, score and lives count
     score = 0;
-    livesCount = 3; 
+    livesCount = 3;
 }
 
 function restartGame() {  // Function that restarts the game
-    gameOverDiv.style.display = 'none'; 
+    gameOverDiv.style.display = 'none';
     main.innerHTML = '';  // Clear the maze so that a new one can be generated
     startGame();  // Start the game again
 }
@@ -328,11 +329,11 @@ function restartGame() {  // Function that restarts the game
 function lbttnClick() {  // Function that handles the left button click for the on screem movement 
     const handleMouseDown = () => {
         leftPressed = true;
-        rightPressed = false; 
+        rightPressed = false;
         upPressed = false;
         downPressed = false;
     };
-    
+
     const handleMouseUp = () => {
         leftPressed = false;
     };
@@ -349,7 +350,7 @@ function ubttnClick() {  // Function that handles the up button click for the on
         leftPressed = false;
         rightPressed = false;
     };
-    
+
     const handleMouseUp = () => {
         upPressed = false;
     };
@@ -366,7 +367,7 @@ function rbttnClick() {  // Function that handles the right button click for the
         upPressed = false;
         downPressed = false;
     };
-    
+
     const handleMouseUp = () => {
         rightPressed = false;
     };
@@ -383,7 +384,7 @@ function dbttnClick() {  // Function that handles the down button click for the 
         leftPressed = false;
         rightPressed = false;
     };
-    
+
     const handleMouseUp = () => {
         downPressed = false;
     };
@@ -411,7 +412,7 @@ function keyUp(event) {  // Function that handles the key up event for the keybo
         aPressed = false;
     } else if (event.key === 'd') {
         dPressed = false;
-    }        
+    }
 }
 
 function keyDown(event) {  // Function that handles the key down event for the keyboard movement
@@ -431,7 +432,7 @@ function keyDown(event) {  // Function that handles the key down event for the k
         aPressed = true;
     } else if (event.key === 'd') {
         dPressed = true;
-    }        
+    }
 }
 
 
@@ -457,9 +458,9 @@ function randomlyMoveEnemy(enemy) {  // Function that randomly moves the enemy
     }
 
     function willCollideWithEnemy(newX, newY) {  // Function that checks if the enemy will collide with another enemy
-        const buffer = 5; 
+        const buffer = 5;
         for (let i = 0; i < enemies.length; i++) {
-            if (i === enemy) continue; 
+            if (i === enemy) continue;
             const otherRect = enemies[i].getBoundingClientRect();
             if (
                 newX + enemyRect.width > otherRect.left - buffer &&
@@ -477,7 +478,7 @@ function randomlyMoveEnemy(enemy) {  // Function that randomly moves the enemy
     let topR = document.elementFromPoint(enemyRect.right, enemyRect.top);
     let btmL = document.elementFromPoint(enemyRect.left, enemyRect.bottom);
     let btmR = document.elementFromPoint(enemyRect.right, enemyRect.bottom);
-    
+
     switch (enemyDirections[enemy]) {  // Check the direction of the enemy and move it accordingly
         case 0: // Up
             if (!topL?.classList.contains('wall') && !topR?.classList.contains('wall') &&   // Check if the enemy can move up
@@ -528,35 +529,35 @@ function lives() {  // Function that handles the lives of the player
 
 function loseLife() {  // Function that handles the loss of life
     if (isInvulnerable) return; // Don't lose life if invulnerable
-    
+
     livesCount--;  // Decrease the lives count and update the visual hearts
     lives();
-    
+
     if (livesCount <= 0) {  // If the player has no lives left, show the game over screen and play the game over animation
         player.classList.add('dead');
         showGameOverScreen();
     } else {
         isInvulnerable = true;  // Make player invulnerable and show hit animation
         player.classList.add('hit');
-        
+
         // Disable movement
         upPressed = false;
         downPressed = false;
         leftPressed = false;
         rightPressed = false;
 
-        
-        setTimeout(() => {player.classList.remove('hit');}, 1500); // Remove hit animation and re-enable movement after 1.5 seconds
-        
 
-        setTimeout(() => {isInvulnerable = false;}, 2500);  // Remove invulnerability after 2.5 seconds
+        setTimeout(() => { player.classList.remove('hit'); }, 1500); // Remove hit animation and re-enable movement after 1.5 seconds
+
+
+        setTimeout(() => { isInvulnerable = false; }, 2500);  // Remove invulnerability after 2.5 seconds
 
         const tempKeyDown = (e) => {
             if (!e.key.startsWith('Arrow')) {
                 keyDown(e); // Create temporary handlers that only block arrow keys
             }
         };
-        
+
         const tempKeyUp = (e) => {
             if (!e.key.startsWith('Arrow')) {
                 keyUp(e);
@@ -568,7 +569,7 @@ function loseLife() {  // Function that handles the loss of life
         document.removeEventListener('keyup', keyUp);
         document.addEventListener('keydown', tempKeyDown);
         document.addEventListener('keyup', tempKeyUp);
-        
+
         // Restore original handlers after 1.5 seconds
         setTimeout(() => {
             document.removeEventListener('keydown', tempKeyDown);
@@ -583,12 +584,12 @@ function handlePlayerMovement() {  // Function that handles the player movement
     if (downPressed) {  // Function that handles down movement
         let position = player.getBoundingClientRect();  // Get the position of the player
         let newBottom = position.bottom + 1;  // Move the player down
-        let btmL = document.elementFromPoint(position.left, newBottom); 
+        let btmL = document.elementFromPoint(position.left, newBottom);
         let btmR = document.elementFromPoint(position.right, newBottom);
 
         if (!btmL.classList.contains('wall') && !btmR.classList.contains('wall')) {  // Collision check for walls
             playerTop++;
-            player.style.top = playerTop + 'px'; 
+            player.style.top = playerTop + 'px';
         }
         playerMouth.classList = 'down';  // Change animation to down
     } else if (upPressed) {  // Function that handles up movement
@@ -678,11 +679,11 @@ function playerControlEnemy() { // Function to control the enemy using WASD
 
 
 
-setInterval(function() {  // Main game loop
+setInterval(function () {  // Main game loop
     if (!gameStarted) return; // Prevents movement if the game hasn't started
 
     handlePlayerMovement();  // Call the function to handle player movement
-    
+
     // Point collision & score update
     const position = player.getBoundingClientRect();  // Get the position of the player
     const points = document.querySelectorAll('.point');

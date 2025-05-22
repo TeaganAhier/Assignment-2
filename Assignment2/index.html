@@ -7,7 +7,7 @@
     <title>AS2</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="images/icon.png" type="image/x-icon">
-    <script src="script2.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -16,6 +16,18 @@
         <h1>Snack Man!</h1>
     </header>
 
+    <div class="playerSelection">
+        <div class="onePlayer">
+            <img src="images/icon.png" alt="logo">
+            <h1>One Player</h1>
+        </div>
+        <div class="twoPlayer">
+            <img src="images/icon.png" alt="logo">
+            <h1>Two Players</h1>
+        </div>
+    </div>
+
+
     <!-- Start Button -->
     <div class="startDiv">
         <div class="start">
@@ -23,17 +35,15 @@
             <h1>Start</h1>
         </div>
     </div>
-
-    <!-- Game Over Screen with One Button -->
+    <!-- Game Over Screen -->
     <div class="startDiv" id="gameOverDiv" style="display: none;">
         <div class="start" id="restartButton">
             <img src="images/icon.png" alt="logo">
-            <h1>Game Over</h1> <!-- Large Game Over Text -->
-            <p>Click to Restart</p> <!-- Smaller Restart Instruction -->
+            <h1>Game Over</h1>
+            <p>Click to Restart</p>
         </div>
     </div>
-
-
+    <!-- Leaderboard Table -->
     <div class="leaderboard">
         <h1>LeaderBoard:</h1>
         <ol>
@@ -45,21 +55,26 @@
             <li>John3........35</li>
         </ol>
     </div>
+    <div class="lightMode">
+        <h1>Light Mode</h1>
+    </div>
 
     <main>
     </main>
-
+    <!-- Lives Available -->
     <div class="lives">
         <h1>Lives:</h1>
         <ul>
         </ul>
     </div>
-
+    <!-- Score and level counter -->
     <div class="score">
         <h1>Score:</h1>
         <p>0</p>
+        <h1>Level:</h1>
+        <p class="level"></p>
     </div>
-
+    <!-- Controls -->
     <div class="controls">
         <button id="lbttn">&#9664;</button> <!-- LEFT -->
         <button id="ubttn">&#9650;</button> <!-- UP -->
